@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Club Social Canaima</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">🏞️ Canaima</div>
+    <ul>
+      <li><a href="#catalogo" id="btnCatalogo">Catálogo</a></li>
+      <li><a href="#calendario" id="btnCalendario">Disponibilidad</a></li>
+      <li><a href="#login" id="btnLogin">Iniciar Sesión</a></li>
+      <li><a href="#" id="btnCerrarSesion" style="display:none;">Cerrar Sesión</a></li>
+      <li><a href="#admin" id="btnAdmin" style="display:none;">Panel Admin</a></li>
+    </ul>
+  </nav>
+
+  <!-- Portada/hero (siempre visible al inicio) -->
+  <section class="seccion" id="hero">
+    <header class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-text">
+        <h1>Bienvenido al Club Social Canaima</h1>
+        <p>Tu evento, nuestro espacio. Reserva en segundos.</p>
+        <div class="buttons">
+          <a href="#catalogo" class="btn" id="btnReservarSalon">Reservar Salón</a>
+          <a href="#login" class="btn btn-outline">Iniciar Sesión</a>
+          <a href="#calendario" class="btn">Ver Disponibilidad</a>
+        </div>
+      </div>
+    </header>
+  </section>
+
+  <!-- Catálogo de Salones -->
+  <section class="seccion" id="catalogo" style="display:none;">
+    <h2>Catálogo de Salones</h2>
+    <div class="cards">
+      <!-- Tarjetas de salón -->
+      <div class="card salon-card" data-salon="CerradoA">
+        <img src="img/salon_cerrado_a.jpg" alt="Salón Cerrado A" class="salon-img">
+        <h3>Salón Cerrado A</h3>
+        <p>Capacidad: 30 personas<br>Servicios: Aire acondicionado, sonido, mesas y sillas</p>
+        <button class="btn" onclick="verDisponibilidad('CerradoA')">Ver disponibilidad</button>
+        <button class="btn btn-outline" onclick="abrirReserva('CerradoA')">Reservar</button>
+      </div>
+      <div class="card salon-card" data-salon="CerradoB">
+        <img src="img/salon_cerrado_b.jpg" alt="Salón Cerrado B" class="salon-img">
+        <h3>Salón Cerrado B</h3>
+        <p>Capacidad: 30 personas<br>Servicios: Aire acondicionado, sonido, mesas y sillas</p>
+        <button class="btn" onclick="verDisponibilidad('CerradoB')">Ver disponibilidad</button>
+        <button class="btn btn-outline" onclick="abrirReserva('CerradoB')">Reservar</button>
+      </div>
+      <div class="card salon-card" data-salon="PequeñoA">
+        <img src="img/salon_pequeno_a.jpg" alt="Salón Pequeño A" class="salon-img">
+        <h3>Salón Pequeño A</h3>
+        <p>Capacidad: 15 personas<br>Servicios: Aire acondicionado, sonido, mesas y sillas</p>
+        <button class="btn" onclick="verDisponibilidad('PequeñoA')">Ver disponibilidad</button>
+        <button class="btn btn-outline" onclick="abrirReserva('PequeñoA')">Reservar</button>
+      </div>
+      <div class="card salon-card" data-salon="PequeñoB">
+        <img src="img/salon_pequeno_b.jpg" alt="Salón Pequeño B" class="salon-img">
+        <h3>Salón Pequeño B</h3>
+        <p>Capacidad: 15 personas<br>Servicios: Aire acondicionado, sonido, mesas y sillas</p>
+        <button class="btn" onclick="verDisponibilidad('PequeñoB')">Ver disponibilidad</button>
+        <button class="btn btn-outline" onclick="abrirReserva('PequeñoB')">Reservar</button>
+      </div>
+      <div class="card salon-card" data-salon="Piscina">
+        <img src="img/salon_piscina.jpg" alt="Salón con Piscina" class="salon-img">
+        <h3>Salón con Piscina</h3>
+        <p>Capacidad: Eventos masivos<br>Servicios: Piscina, bar, mesas y sillas</p>
+        <button class="btn" onclick="verDisponibilidad('Piscina')">Ver disponibilidad</button>
+        <button class="btn btn-outline" onclick="abrirReserva('Piscina')">Reservar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulario de Reservación -->
+  <section class="seccion" id="reserva" style="display:none;">
+    <h2>Reservar Salón</h2>
+    <form class="reserva-form" id="reservaForm">
+      <input type="text" placeholder="Nombre Completo" name="nombre" required />
+      <input type="text" placeholder="Cédula" name="cedula" required />
+      <input type="email" placeholder="Correo Electrónico" name="correo" required />
+      <input type="tel" placeholder="Teléfono" name="telefono" required />
+      <select name="salon" required>
+        <option value="">Seleccione el salón</option>
+        <option value="CerradoA">Salón Cerrado A</option>
+        <option value="CerradoB">Salón Cerrado B</option>
+        <option value="PequeñoA">Salón Pequeño A</option>
+        <option value="PequeñoB">Salón Pequeño B</option>
+        <option value="Piscina">Salón con Piscina</option>
+      </select>
+      <input type="date" name="fecha" required />
+      <input type="time" name="hora" required />
+      <div>
+        <label>Servicios adicionales:</label><br>
+        <input type="checkbox" name="servicios" value="catering"> Catering
+        <input type="checkbox" name="servicios" value="camareros"> Camareros
+        <input type="checkbox" name="servicios" value="decoracion"> Decoración
+      </div>
+      <textarea placeholder="Comentarios" name="comentarios"></textarea>
+      <button type="submit">Confirmar Reserva</button>
+    </form>
+  </section>
+
+  <!-- Calendario de Disponibilidad -->
+  <section class="seccion" id="calendario" style="display:none;">
+    <h2>Calendario de Disponibilidad</h2>
+    <div id="calendario-container">
+      <!-- Aquí irá el calendario generado por JS -->
+    </div>
+    <div class="filtros">
+      <label for="filtroSalon">Filtrar por salón:</label>
+      <select id="filtroSalon">
+        <option value="">Todos</option>
+        <option value="CerradoA">Cerrado A</option>
+        <option value="CerradoB">Cerrado B</option>
+        <option value="PequeñoA">Pequeño A</option>
+        <option value="PequeñoB">Pequeño B</option>
+        <option value="Piscina">Piscina</option>
+      </select>
+      <label for="filtroFecha">Fecha:</label>
+      <input type="date" id="filtroFecha" />
+      <button class="btn" id="btnFiltrarCalendario">Filtrar</button>
+    </div>
+    <div id="leyenda">
+      <span class="disponible">Disponible</span>
+      <span class="reservado">Reservado</span>
+      <span class="proceso">En proceso</span>
+    </div>
+  </section>
+
+  <!-- Panel Administrativo -->
+  <section class="seccion" id="admin" style="display:none;">
+    <h2>Panel Administrativo</h2>
+    <div id="admin-tabs">
+      <button class="tab-btn active" onclick="mostrarTabAdmin('reservas')">Reservas</button>
+      <button class="tab-btn" onclick="mostrarTabAdmin('usuarios')">Usuarios</button>
+    </div>
+    <div id="admin-content">
+      <!-- Contenido admin generado por JS -->
+    </div>
+  </section>
+
+  <!-- Modal para detalles de reserva -->
+  <div id="modalReserva" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <h2>Detalles de la Reserva</h2>
+      <div id="detallesReserva">
+        <!-- Contenido generado por JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Login / Registro -->
+  <section class="seccion" id="login" style="display:none;">
+    <div class="auth-container">
+      <div class="auth-tabs">
+        <button class="tab-btn active" onclick="mostrarFormulario('login')">Iniciar Sesión</button>
+        <button class="tab-btn" onclick="mostrarFormulario('registro')">Registrarse</button>
+      </div>
+      
+      <!-- Formulario de Login -->
+      <div id="loginFormContainer" class="auth-form">
+        <h2>Iniciar Sesión</h2>
+        <form id="loginForm">
+          <input type="text" name="usuario" placeholder="Usuario" required>
+          <input type="password" name="password" placeholder="Contraseña" required>
+          <button type="submit">Iniciar Sesión</button>
+        </form>
+      </div>
+      
+      <!-- Formulario de Registro -->
+      <div id="registerFormContainer" class="auth-form" style="display:none;">
+        <h2>Registrarse</h2>
+        <form id="registerForm">
+          <input type="text" name="usuario" placeholder="Usuario" required>
+          <input type="email" name="correo" placeholder="Correo electrónico" required>
+          <input type="password" name="password" placeholder="Contraseña" required>
+          <select name="rol">
+            <option value="usuario">Usuario</option>
+            <option value="admin">Administrador</option>
+          </select>
+          <button type="submit">Registrarse</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Club Social Canaima. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
